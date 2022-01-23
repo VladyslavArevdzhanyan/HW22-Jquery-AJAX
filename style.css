@@ -1,0 +1,67 @@
+body {
+    background-color: aquamarine;    
+}
+
+#block {
+    width: 700px;
+    height: 700px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    top: calc(50% - 350px);
+    padding: 20px;
+    overflow: scroll;
+}
+
+ul li {
+    margin-top: 10px;
+    padding-left: 7px;
+    list-style: none;
+    color: black;
+    padding-bottom: 3px;
+}
+
+.set-status {
+    float: right;
+}
+
+.delete-task {
+    float: right;
+}
+
+.green {
+    background: green;
+    color: black;
+}
+
+.yellow {
+    background: yellow;
+    color: black;
+}
+
+
+
+
+.btnRemove:hover {
+    background-color: orange;
+    border: 2px solid black;
+    color: black;
+}
+
+.valid {
+    border: 2px solid green;
+    color: green;
+    box-shadow: none;
+}
+
+.invalid {
+    border: 2px solid red;
+    color: red;
+    box-shadow: none;
+}
+
+.empty {
+    border: 2px solid black;
+}
