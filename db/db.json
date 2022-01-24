@@ -6,9 +6,9 @@
       "complited": true
     },
     {
-      "id": 2,
       "task": "buy bread",
-      "complited": false
+      "complited": false,
+      "id": 2
     },
     {
       "task": "buy sugar",

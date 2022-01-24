@@ -1,11 +1,10 @@
-let input = document.getElementById('inputText');
-let list = document.getElementById('list');
-let createBtn = document.getElementById('applyBtn');
+let input = $('#inputText');
+let list = $('#list');
 
 class TodoList {
   constructor(el) {
     this.el = el;
-    this.el.addEventListener('click', (event) => {
+    this.el.on('click', (event) => {
       let target = event.target;
       let id = target.closest('li').dataset.id;
       if (target.classList.contains('set-status')) {
@@ -15,12 +14,13 @@ class TodoList {
       }
     })
   }
+
   async getData() {
     try {
       return await $.ajax({
         url: 'http://localhost:3000/todos',
-        dataType: "json",
-        type: "GET"
+        dataType: 'json',
+        type: 'GET'
       });
     } catch (error) {
       console.log(new Error(error));
@@ -35,10 +35,10 @@ class TodoList {
         if (!el) {
           return;
         }
-        let colorToDo = el.complited ? "green" : "yellow";
+        let colorToDo = el.complited ? 'green' : 'yellow';
         lis += `<li data-id="${el.id}" class ="${colorToDo}">${el.task}<button class="delete-task">Delete</button><button class="set-status">Change status</button></li>`;
       }
-      this.el.innerHTML = lis;
+      this.el.html(lis);
     } catch (error) {
       console.log(new Error(error));
     }
@@ -46,22 +46,21 @@ class TodoList {
 
   async addTodo() {
     try {
-      if (input.value !== '') {
+      if (input.val() !== '') {
         await $.ajax({
           url: 'http://localhost:3000/todos',
-          type: "POST",
-          dataType: "json",
+          type: 'POST',
+          dataType: 'json',
           headers: {
             'Content-Type': 'application/json'
           },
           data: JSON.stringify({
-            task: input.value,
+            task: input.val(),
             complited: false,
           })
         });
         this.render()
       }
-
     } catch (err) {
       console.log(err);
     }
@@ -80,8 +79,8 @@ class TodoList {
 
           $.ajax({
             url: `http://localhost:3000/todos/${id}`,
-            type: "PUT",
-            dataType: "json",
+            type: 'PUT',
+            dataType: 'json',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -110,8 +109,8 @@ class TodoList {
         if (item.id == id) {
           $.ajax({
             url: `http://localhost:3000/todos/${id}`,
-            type: "DELETE",
-            dataType: "json",
+            type: 'DELETE',
+            dataType: 'json',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -129,9 +128,9 @@ class TodoList {
 let createLi = new TodoList(list);
 createLi.render();
 
-createBtn.addEventListener('click', function () {
-  if (input.value) {
+$("#applyBtn").on('click', function () {
+  if (input.val()) {
     createLi.addTodo();
-    input.value = '';
+    input.val(null);
   }
 })
